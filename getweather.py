@@ -43,9 +43,11 @@ def get_weather():
         info.write(txttmr)
         info.write('\n')
 
-        weather_h_b_w = soup.body.find(class_ = 'temperature_info').select('dl')
-        soup3 = BeautifulSoup(str(weather_h_b_w), "lxml")
-        info.write(soup3.get_text())
+        weather_w = soup.body.find(class_ = 'temperature_info').select('dl')
+        soup3 = BeautifulSoup(str(weather_w), "lxml")
+        wind = soup3.dd.find_next(class_ = 'desc')
+        wind = wind.find_next('dd')
+        info.write(wind.get_text())
         info.write('\n')
 
 
