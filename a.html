@@ -12,6 +12,7 @@
             width: 630px;
             background-color: rgb(136, 241, 122);
             margin: auto;
+            margin-top: 50px;
             border-radius:25px; 
             position: relative;
         }
@@ -19,7 +20,7 @@
             height: 130px;;
             width: 200px;
             margin-left: 40px;
-            background-color: aqua;
+            /* background-color: aqua; */
             position: absolute;
             border-radius:25px;
         }
@@ -28,7 +29,7 @@
             width: 200px;
             margin-left: 260px;
             border-radius:25px;
-            background-color: rgb(255, 174, 0);
+            /* background-color: rgb(235, 212, 162); */
             position:absolute;
         }
         #werain{
@@ -36,7 +37,7 @@
             width: 100px; 
             margin-left: 480px;
             border-radius:25px;
-            background-color: rgb(103, 22, 141);
+            /* background-color: rgb(103, 22, 141); */
             position:absolute;
         }
         #main{
@@ -46,7 +47,7 @@
             margin: auto;
             border-radius:25px; 
             position: relative;
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
         #clothes{
@@ -55,7 +56,8 @@
             width: 180px;
             margin-left: 25px;
             border-radius:25px;
-            background-color: rgb(48, 180, 99);
+            background-color: rgb(131, 192, 228);
+            border: 2px solid;
             position:absolute;
         }
         #pant{
@@ -64,6 +66,7 @@
             margin-left: 220px;
             border-radius:25px;
             background-color: rgb(39, 83, 150);
+            border: 2px solid;
             position:absolute;
         }
 
@@ -72,25 +75,77 @@
             width: 180px;
             margin-left: 415px;
             border-radius:25px;
-            
+            border: 2px solid;
             position:absolute;
             background-color: rgb(19, 151, 107);
         }
+        #wepng{
+            margin-left: 20%;
+        }
+        #weather{
+            text-align: center;
+            font-size: 20px;
+        }
+        #temperature{
+            text-align: center;
+            font-size: 20px;
+            
+        }
+        .upclothes{
+            height: 110px;
+            width: 160px;
+            margin-left: 10px;
+            
+        }
+        .pants{
+            height: 110px;
+            width: 160px;
+            margin-left: 10px;
+        }
+        .tools{
+
+            height: 110px;
+            width: 160px;
+            margin-left: 10px;
+        }
+
 
     </style>
 </head>
 <body>
     <div id="top">
-        <div id="weimg">  그림 구역</div>
+        <div id="weimg">  
+            <img src="/img/111.png" alt="" id="wepng">
+        </div>
 
-        <div id="wetext">  문자 구역</div>
+        <div id="wetext">  
+            <p id="weather">구름조금</p>
+            <p id = "temperature">현제온도 : 31°C</p>
+        </div>
 
         <div id="werain">  비 소식 구역</div>
     </div>
     <div id="main">
-        <div id="clothes"> 상의 </div>
-        <div id="pant"> 바지 </div>
-        <div id="tool"> 도구 </div>
+        <div id="clothes"> 상의 
+
+            <img src="" alt=""class="upclothes">
+            <img src="" alt=""class="upclothes">
+            <img src="" alt="" class="upclothes">
+
+
+        </div>
+        <div id="pant"> 바지 
+
+            <img src="" alt=""class="pants">
+            <img src="" alt=""class="pants">
+
+        </div>
+        <div id="tool"> 도구 
+
+            <img src="" alt=""class="tools">
+            <img src="" alt=""class="tools">
+            <img src="" alt=""class="tools">
+        </div>
 
 
 
