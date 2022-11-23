@@ -17,35 +17,28 @@ def get_weather():
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
     }
 
-    response = requests.get(url, headers=headers1, params=kw)
+    response = requests.get(url, headers=headers1,params=kw)
 
     soup = BeautifulSoup(response.content.decode(), 'lxml')
-
-    wr = soup.body.find_all(class_='blind')
-    with open('temp.txt', 'w+', encoding='utf-8') as temp:
-        for t in wr:
-            t1 = t.string
-            temp.write(t1)
-            temp.write('\n')
-
-    with open('weatherinfo.txt', 'w+', encoding='utf-8') as info:
+        
+    with open('weatherinfo.txt','w+',encoding='utf-8') as info:
         info.truncate(0)
-
-        weather_name = soup.body.find_all(class_='weather before_slash')
+            
+        weather_name = soup.body.find_all(class_= 'weather before_slash')
         for i in weather_name:
             ii = i.string
             info.write(ii)
         info.write('\n')
 
-        weather_tmr = soup.body.find(class_='temperature_text')
+        weather_tmr = soup.body.find(class_ = 'temperature_text')        
         soup2 = BeautifulSoup(str(weather_tmr), "lxml")
         txttmr = soup2.get_text()
         info.write(txttmr)
         info.write('\n')
 
-        weather_w = soup.body.find(class_='temperature_info').select('dl')
+        weather_w = soup.body.find(class_ = 'temperature_info').select('dl')
         soup3 = BeautifulSoup(str(weather_w), "lxml")
-        wind = soup3.dd.find_next(class_='desc')
+        wind = soup3.dd.find_next(class_ = 'desc')
         wind = wind.find_next('dd')
         info.write(wind.get_text())
         info.write('\n')
@@ -78,12 +71,18 @@ def get_rain():
         'hr1': 'Y'
     }
 
+    fs = open('./needvar.txt', 'w+', encoding='utf-8')
+
     response = requests.get(rain, headers=headers, params=kw)
     soup = BeautifulSoup(response.content.decode(), 'lxml')
+    with open('./testuse.html', 'w+', encoding='utf-8') as web:
+        web.write(response.content.decode())
 
     soup = BeautifulSoup(response.content.decode(), 'lxml')
     rainlink = soup.body.find_all(class_ = 'item-wrap')
     souprainlink = BeautifulSoup(str(rainlink), 'lxml')
+
+    fs.write(str(souprainlink.ul.find_next('ul')))
 
     with open('./weatherinfo.txt', 'a', encoding='utf-8') as f:
         f.write('\n')
@@ -105,4 +104,3 @@ def get_rain():
             f.write(tagli.get_text())
             f.write('\n')
             
-
