@@ -1,6 +1,7 @@
 import datetime
 from getweather import *
 import webbrowser
+from bottle import template
 
 now_month = datetime.datetime.now().month
 
@@ -214,26 +215,187 @@ weather.replace('\n', '').replace('\r', '')
 #
 GEN_HTML = "demo_1.html"
 ll = ".png"
-tt = weather+ll
+tt: str = weather+ll
 tt.replace('\n', '').replace('\r', '')
 
 print(tt)
 
-f = open(GEN_HTML, 'w+')
-message = """
+
+articles = [tt]
+template_demo= """
+<!DOCTYPE html>
 <html>
 <head>
-    <title>옷차림</title>
+    <title>옷차림
+    </title>
+    <style>
+        body{
+            background-color: bisque;
+        }
+        #top{
+            height: 130px;;
+            width: 630px;
+            background-color: rgb(136, 241, 122);
+            margin: auto;
+            margin-top: 50px;
+            border-radius:25px; 
+            position: relative;
+        }
+        #weimg{
+            height: 130px;;
+            width: 200px;
+            margin-left: 40px;
+            /* background-color: aqua; */
+            position: absolute;
+            border-radius:25px;
+        }
+        #wetext{
+            height: 130px;;
+            width: 200px;
+            margin-left: 260px;
+            border-radius:25px;
+            /* background-color: rgb(235, 212, 162); */
+            position:absolute;
+        }
+        #werain{
+            height: 130px;;
+            width: 100px; 
+            margin-left: 480px;
+            border-radius:25px;
+            /* background-color: rgb(103, 22, 141); */
+            position:absolute;
+        }
+        #main{
+            height: 390px;;
+            width: 630px;
+            background-color: rgb(136, 241, 122);
+            margin: auto;
+            border-radius:25px; 
+            position: relative;
+            margin-top: 20px;
+            
+        }
+
+        #clothes{
+            
+            height: 390px;;
+            width: 180px;
+            margin-left: 25px;
+            border-radius:25px;
+            background-color:rgb(228, 245, 76);
+            border: 1px solid;
+            position:absolute;
+        }
+        #pant{
+            height: 390px;;
+            width: 180px;
+            margin-left: 220px;
+            border-radius:25px;
+            background-color:rgb(228, 245, 76);
+            border: 1px solid;
+            position:absolute;
+        }
+
+        #tool{
+            height: 390px;;
+            width: 180px;
+            margin-left: 415px;
+            border-radius:25px;
+            border: 1px solid;
+            position:absolute;
+            background-color:rgb(228, 245, 76);
+        }
+        #wepng{
+            margin-left: 20%;
+        }
+        #weather{
+            text-align: center;
+            font-size: 20px;
+        }
+        #temperature{
+            text-align: center;
+            font-size: 20px;
+            
+        }
+        .upclothes{
+            margin-top: 10px;
+            height: 110px;
+            width: 160px;
+            margin-left: 10px;
+            
+        }
+        .pants{
+            height: 110px;
+            width: 160px;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+        .tools{
+
+            height: 110px;
+            width: 160px;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+        #bottom{
+            height: 130px;;
+            width: 630px;
+            background-color: rgb(136, 241, 122);
+            margin: auto;
+            margin-top: 20px;
+            border-radius:25px; 
+            position: relative;
+        }
+
+    </style>
 </head>
-
 <body>
+    % for wear,tmr in items:
+    <div id="top">
+        <div id="weimg">  
+            <img src="{{wear}}" alt="" id="wepng">
+        </div>
 
-    <img src="%s" alt="">
+        <div id="wetext">  
+            <p id="weather"></p>
+            <p id = "temperature">현제온도 :°C</p>
+        </div>
+
+        <div id="werain">  비 소식 구역</div>
+    </div>
+    <div id="main">
+        <div id="clothes">  
+
+            <img src="" alt=""class="upclothes">
+            <img src="" alt=""class="upclothes">
+            <img src="" alt="" class="upclothes">
+
+
+        </div>
+        <div id="pant"> 
+
+            <img src="" alt=""class="pants">
+            <img src="" alt=""class="pants">
+
+        </div>
+        <div id="tool"> 
+
+            <img src="" alt=""class="tools">
+            <img src="" alt=""class="tools">
+            <img src="" alt=""class="tools">
+        </div>
+    </div>
+    <div id="bottom">
+    </div>
+    %end
+
 </body>
-</html>
-""" % (tt)
+</html>"""
 
-f.write(message)
-f.close()
+print("html ")
+html = template(template_demo, items=articles)
+with open(GEN_HTML,'w') as f:
+    f.write(html)
 
-webbrowser.open(GEN_HTML, new=1)
+
+webbrowser.open(GEN_HTML)
