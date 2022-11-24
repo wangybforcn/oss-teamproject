@@ -126,9 +126,9 @@ zhongjiancengyifu = {
 }
 
 qiuku = {
-    "얇은 속바지": 6,
-    "두꺼운 속바지": 9,
-    "따뜻한 속바지": 12,
+    "얇은 내복 바지": 6,
+    "두꺼운 내복 바지": 9,
+    "따뜻한 바지": 12,
     "솜털 속바지": 15,
 }
 
@@ -213,15 +213,17 @@ weather.replace('\n', '').replace('\r', '')
 #   html 편집구역
 #
 #
+print(tmr)
+
 GEN_HTML = "demo_1.html"
+ss = "img/weather/"
 ll = ".png"
-tt: str = weather+ll
+tt: str = ss+weather+ll     # 그림의 이름
 tt.replace('\n', '').replace('\r', '')
 
-print(tt)
+rain="10시간내 비 소식이 없습니다."
 
-
-articles = [tt]
+articles = [(tt ,weather, tmr,rain)]
 template_demo= """
 <!DOCTYPE html>
 <html>
@@ -238,7 +240,7 @@ template_demo= """
             background-color: rgb(136, 241, 122);
             margin: auto;
             margin-top: 50px;
-            border-radius:25px; 
+            border-radius:25px;
             position: relative;
         }
         #weimg{
@@ -259,7 +261,7 @@ template_demo= """
         }
         #werain{
             height: 130px;;
-            width: 100px; 
+            width: 100px;
             margin-left: 480px;
             border-radius:25px;
             /* background-color: rgb(103, 22, 141); */
@@ -270,14 +272,14 @@ template_demo= """
             width: 630px;
             background-color: rgb(136, 241, 122);
             margin: auto;
-            border-radius:25px; 
+            border-radius:25px;
             position: relative;
             margin-top: 20px;
-            
+
         }
 
         #clothes{
-            
+
             height: 390px;;
             width: 180px;
             margin-left: 25px;
@@ -315,14 +317,14 @@ template_demo= """
         #temperature{
             text-align: center;
             font-size: 20px;
-            
+
         }
         .upclothes{
             margin-top: 10px;
             height: 110px;
             width: 160px;
             margin-left: 10px;
-            
+
         }
         .pants{
             height: 110px;
@@ -343,28 +345,33 @@ template_demo= """
             background-color: rgb(136, 241, 122);
             margin: auto;
             margin-top: 20px;
-            border-radius:25px; 
+            border-radius:25px;
             position: relative;
+        }
+        #rain{
+            text-align: center;
+            font-size: 20px;
+        
         }
 
     </style>
 </head>
 <body>
-    % for wear,tmr in items:
+    % for wear,weather,tmr,rain in items:
     <div id="top">
-        <div id="weimg">  
+        <div id="weimg">
             <img src="{{wear}}" alt="" id="wepng">
         </div>
 
-        <div id="wetext">  
-            <p id="weather"></p>
-            <p id = "temperature">현제온도 :°C</p>
+        <div id="wetext">
+            <p id="weather">{{weather}}</p>
+            <p id = "temperature">현제온도 {{tmr}}°C</p>
         </div>
 
-        <div id="werain">  비 소식 구역</div>
+        <div id="werain"><P id="rain">{{rain}}</p></div>
     </div>
     <div id="main">
-        <div id="clothes">  
+        <div id="clothes">
 
             <img src="" alt=""class="upclothes">
             <img src="" alt=""class="upclothes">
@@ -372,13 +379,13 @@ template_demo= """
 
 
         </div>
-        <div id="pant"> 
+        <div id="pant">
 
             <img src="" alt=""class="pants">
             <img src="" alt=""class="pants">
 
         </div>
-        <div id="tool"> 
+        <div id="tool">
 
             <img src="" alt=""class="tools">
             <img src="" alt=""class="tools">
