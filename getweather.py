@@ -1,6 +1,8 @@
 #!usr/bin/python
 # -*- coding = utf-8 -*-
 
+#首先，我不想写注释！！！！！！！
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -19,6 +21,10 @@ def get_weather():
 
     response = requests.get(url, headers=headers1,params=kw)
 
+    
+    #上面为爬虫部分
+    #下面为关键字检索部分
+    
     soup = BeautifulSoup(response.content.decode(), 'lxml')
         
     with open('weatherinfo.txt','w+',encoding='utf-8') as info:
@@ -70,9 +76,10 @@ def get_rain():
         'unit': 'm/s',
         'hr1': 'Y'
     }
-
+    
     response = requests.get(rain, headers=headers, params=kw)
-    soup = BeautifulSoup(response.content.decode(), 'lxml')
+    
+    #以上为爬取动态网页部分，kw参数code很重要！！
 
     soup = BeautifulSoup(response.content.decode(), 'lxml')
     rainlink = soup.body.find_all(class_ = 'item-wrap')
@@ -89,7 +96,8 @@ def get_rain():
         f.write('\n')
         i = 0
 
-
+        
+        #大循环数字决定爬取几个小时的数据
         for i in range(10):
             tagul = tagul.find_next('ul')
             tagli = tagul.li
