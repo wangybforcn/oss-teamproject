@@ -229,7 +229,10 @@ ll = ".png"
 tt: str = ss+weather+ll     # 그림의 이름
 tt.replace('\n', '').replace('\r', '')
 
-rain="10시간내 비 소식이 없습니다."
+if rain_ > 0:
+    rain = "미래 10시간내 강수의 비률이 " + rain_ + "% 입니다."
+else:
+    rain="10시간내 비 소식이 없습니다."
 
 articles = [(tt ,weather, tmr,rain)]
 template_demo= """
