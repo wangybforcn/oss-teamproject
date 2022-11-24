@@ -90,7 +90,7 @@ def get_rain():
         i = 0
 
 
-        for i in range(12):
+        for i in range(10):
             tagul = tagul.find_next('ul')
             tagli = tagul.li
             for i in range(5):
