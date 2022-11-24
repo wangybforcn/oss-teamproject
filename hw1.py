@@ -6,9 +6,11 @@ from bottle import template
 now_month = datetime.datetime.now().month
 
 get_weather()
+get_rain()
 
 with open('./weatherinfo.txt', 'r', encoding='utf-8') as w:
-    for time in range(3):
+    rain_ = 0
+    for time in range(15):
         if time == 0:
             weather = w.readline()
             weather = weather.strip('\n')
@@ -18,13 +20,19 @@ with open('./weatherinfo.txt', 'r', encoding='utf-8') as w:
         elif time == 2:
             wind = w.readline()
             wind = wind[:-4]
+        elif time > 2:
+            rain = w.readline()
+            rain = rain[6:-2]
+            if not rain is "" and int(rain) > 0:
+                if int(rain) > rain_:
+                    rain_ = rain
 
-float(tmr)
-print(weather,end="")
-print("온도:" + tmr)
-print("풍력:" + wind)
-
-
+#weather为天气
+#tmr为温度
+#wind为风速
+#如果rain_返回了未来十小时的下雨百分比，返回了该比例的最大值，大于0则有雨
+                    
+                    
 def jijie(now_month):
     if now_month == 3 or now_month == 4:
         return 1
