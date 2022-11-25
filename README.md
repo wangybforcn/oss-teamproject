@@ -15,4 +15,16 @@ How to use:
   
   Tips: 
     Please check if your file contains the img folder, it contains the required images.
-    We also provide the source code: getweather. py and main. py.
+    We also provide the source code: getweather.py and main.py.
+    After the first use, we will generate weatherinfo.txt and demo_1.html, which are used to store weather information and a webpage for displaying results respectively.
+    
+    
+source code：
+  python crawler：왕욱박
+  Algorithm for recommending clothes： 요지학，원복용
+  webpage (ui)：왕욱박，왕성룡
+  
+other Information Collection：원복용
+ppt：원복용
+report：요지학（main），왕성룡，왕욱박，원복용
+speech：왕성룡（twice），원복용（first），요지학（last）
