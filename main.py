@@ -7,8 +7,8 @@ import webbrowser
 from bottle import template
 
 
-# get_weather()
-# get_rain()
+get_weather()
+get_rain()
 
 now_month = datetime.datetime.now().month
 
