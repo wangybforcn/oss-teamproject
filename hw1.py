@@ -8,6 +8,7 @@ now_month = datetime.datetime.now().month
 get_weather()
 get_rain()
 
+
 with open('./weatherinfo.txt', 'r', encoding='utf-8') as w:
     rain_ = 0
     for time in range(15):
@@ -25,14 +26,14 @@ with open('./weatherinfo.txt', 'r', encoding='utf-8') as w:
             rain = rain[6:-2]
             if not rain is "" and int(rain) > 0:
                 if int(rain) > rain_:
-                    rain_ = rain
+                    rain_ = int(rain)
 
 #weather为天气
 #tmr为温度
 #wind为风速
 #如果rain_返回了未来十小时的下雨百分比，返回了该比例的最大值，大于0则有雨
                     
-                    
+          
 def jijie(now_month):
     if now_month == 3 or now_month == 4:
         return 1
@@ -117,20 +118,20 @@ waitao = {
     "패딩": 14
 }
 
-zuilicengyifu = {
-    "반팔 셔츠": 2,
-    "얇은 긴팔": 5,
-    "두꺼운 긴팔": 8,
-    "후드티": 11,
-    "보온 내의": 14
-}
-
 zhongjiancengyifu = {
     "얇은 스웨터": 6,
     "두꺼운 스웨터": 8,
     "얇은 셔츠": 10,
     "두꺼운 셔츠": 12,
     "보온 셔츠": 14,
+}
+
+zuilicengyifu = {
+    "반팔 셔츠": 2,
+    "얇은 긴팔": 5,
+    "두꺼운 긴팔": 8,
+    "후드티": 11,
+    "보온 내의": 14
 }
 
 qiuku = {
@@ -151,7 +152,7 @@ kuzi = {
 # 外衣判断
 for i in -1, 0, 1:
     if wt < 6:
-        rwaitao = 'buchuanwaitao'
+        rwaitao = 'not'
         break
     if get_key(waitao, wt + i) == []:
         continue
@@ -162,7 +163,7 @@ for i in -1, 0, 1:
 # 中间层判断
 for i in -1, 0, 1:
     if zj < 6:
-        rzhong = 'buchuanzhongjian'
+        rzhong = 'not'
         break
 
     if get_key(zhongjiancengyifu, zj + i) == []:
@@ -182,7 +183,7 @@ for i in -1, 0, 1:
 # 秋裤判断
 for i in -1, 0, 1:
     if qk < 6:
-        rxiali = "buchuanqiuku"
+        rxiali = "not"
         break
     if get_key(qiuku, qk + i) == []:
         continue
@@ -197,44 +198,123 @@ for i in 0, -1, 1, -2, 2:
     else:
         rkuzi = get_key(kuzi, wk + i)
         break
+rwaitao = ''.join(rwaitao)
+rzhong = ''.join(rzhong)    
+rli = ''.join(rli)
+rxiali = ''.join(rxiali)
+rkuzi = ''.join(rkuzi)
 
-print(rwaitao)
-print(rzhong)
-print(rli)
-print(rxiali)
-print(rkuzi)
+print(str(rwaitao))
+print(str(rzhong))
+print(str(rli))
+print(str(rxiali))
+print(str(rkuzi))
 
-if weather == "가끔 눈, 한때 눈" or weather == "가끔 비, 한때 비" or weather == "비 또는 눈" or weather == "가끔 비 또는 눈" or weather == "눈 또는 비" or weather == "한때 눈 또는 비" or weather == "눈날림":
-    print("우산를 챙겨가세요")
+we = "img/weather/"
+clo = "img/closthes/"
+png = ".png"
 
+
+# 우산 , 목도리  모자
+if weather == "가끔 눈, 한때 눈" or weather == "가끔 비, 한때 비" or weather == "비 또는 눈" or weather == "가끔 비 또는 눈" or weather == "눈 또는 비" or weather == "한때 눈 또는 비" or weather == "눈날림" or weather == "가끔 비 또는 눈,한때 비 또는 눈" or weather =="가끔 눈 또는 비,한때 눈 또는 비" or weather == "비" or weather == "눈" or weather == "빗방울":
+    unb = clo+"우산"+png
+if rain_ > 0:
+    rainmsg = "미래 10시간 강수확률: " + str(rain_) + "% 입니다."
+    unb = clo+"우산"+png
+else:
+    rainmsg="10시간내 비 소식이 없습니다."
+    nub = clo+"not"+png
+    
 if float(tmr) < 0:
     print("목도리 챙겨가세요")
     print("보온 모자 챙겨가세요")
+    scarf = clo+"목도리"+png
+    hat = clo+"모자"+png
+else:
+    scarf = clo+"not"+png
+    hat=clo+"not"+png
 
 weather.replace('\n', '').replace('\r', '')
 
 
-#
-#
-#
-#
+# 코드 그림 선택
+if rwaitao == "얇은 코드" or rwaitao == "두거운 코드" or rwaitao=="오버코드":
+    closthes1 = clo+"코드"+png
+elif rwaitao == "솜저고리":
+    closthes1 = clo+rwaitao+png
+elif rwaitao == "패딩":
+    closthes1 =clo+rwaitao+png
+elif rwaitao == 'not':
+    closthes1 = clo+rwaitao+png
+    rwaitao = ""
+print(rwaitao)
+print(closthes1)
+
+# 중간층 그림
+if rzhong == "얇은 스웨터" or rzhong == "두꺼운 스웨터" :
+    closthes2 = clo+"스웨터"+png
+elif rzhong == "얇은 셔츠" or rzhong == "두꺼운 셔츠" or rzhong ==  "보온 셔츠":
+    closthes2 = clo+"셔츠"+png
+elif rzhong == "not":
+    closthes2 = clo+rzhong+png
+    rzhong = ""
+    
+# 맨 안에 층
+if rli =="얇은 긴팔" or rli == "두꺼운 긴팔" or rli == "보온 내의":
+    closthes3 = clo+"긴팔 셔츠"+png
+elif rli == "반팔 셔츠":
+    closthes3 = clo+rli+png
+elif rli == "후드티":
+    closthes3 = clo+rli+png
+elif rli == "not":
+    closthes3 = clo+rli+png
+    rli = ""
+
+print(str(closthes1))
+
+if rkuzi =="패딩 바지" or rkuzi=="핫바지" or rkuzi == "두꺼운 바지" or rkuzi == "얇은 바지":
+    pants1=clo+"바지"+png
+elif rkuzi == "반바지":
+    pants1 = clo+rkuzi+png
+    rkuzi = ""
+    
+# 속 
+
+# qiuku = {
+#     "얇은 내복 바지": 6,
+#     "두꺼운 내복 바지": 9,
+#     "따뜻한 바지": 12,
+#     "솜털 내복 바지": 15,
+# }
+
+if rxiali != "not":
+    pants2 = clo+"내복 바지"+png
+else:
+    pants2 = clo+rxiali+png
+    rxiali = ""
+
+
+
+
+
+
 #   html 편집구역
-#
-#
-print(tmr)
+
+
 
 GEN_HTML = "demo_1.html"
-ss = "img/weather/"
-ll = ".png"
-tt: str = ss+weather+ll     # 그림의 이름
+
+
+
+tt: str = we+weather+png     # 그림의 이름
 tt.replace('\n', '').replace('\r', '')
 
-if rain_ > 0:
-    rain = "미래 10시간내 강수의 비률이 " + rain_ + "% 입니다."
-else:
-    rain="10시간내 비 소식이 없습니다."
 
-articles = [(tt ,weather, tmr,rain)]
+
+
+
+articles = [(tt ,weather,tmr,rainmsg,closthes1,closthes2,closthes3,pants1,pants2,unb,scarf,hat)]
+articles2 = [(rwaitao,rzhong,rli,rkuzi,rxiali)]
 template_demo= """
 <!DOCTYPE html>
 <html>
@@ -333,21 +413,21 @@ template_demo= """
         .upclothes{
             margin-top: 10px;
             height: 110px;
-            width: 160px;
-            margin-left: 10px;
+            width: 110px;
+            margin-left: 35px;
 
         }
         .pants{
             height: 110px;
-            width: 160px;
-            margin-left: 10px;
+            width: 110px;
+            margin-left: 35px;
             margin-top: 10px;
         }
         .tools{
 
             height: 110px;
-            width: 160px;
-            margin-left: 10px;
+            width: 110px;
+            margin-left: 35px;
             margin-top: 10px;
         }
         #bottom{
@@ -361,14 +441,27 @@ template_demo= """
         }
         #rain{
             text-align: center;
-            font-size: 20px;
+            font-size: 15px;
         
+        }
+        #bottomtext{
+            height: 110px;;
+            width: 600px;
+            background-color: rgb(228, 245, 76);
+            margin: 0 auto;
+            margin-top: 10px;
+            margin-left: 15px;
+            border-radius:25px; border: 1px solid;
+            position:absolute;
+        }
+        .msg{
+            margin-left:15px;
         }
 
     </style>
 </head>
 <body>
-    % for wear,weather,tmr,rain in items:
+    % for wear,weather,tmr,rain,closthes1,closthes2,closthes3,pants1,pants2,unb,scarf,hat in items:
     <div id="top">
         <div id="weimg">
             <img src="{{wear}}" alt="" id="wepng">
@@ -384,26 +477,36 @@ template_demo= """
     <div id="main">
         <div id="clothes">
 
-            <img src="" alt=""class="upclothes">
-            <img src="" alt=""class="upclothes">
-            <img src="" alt="" class="upclothes">
+            <img src="{{closthes1}}" alt=""class="upclothes">
+            <img src="{{closthes2}}" alt=""class="upclothes">
+            <img src="{{closthes3}}" alt="" class="upclothes">
 
 
         </div>
         <div id="pant">
 
-            <img src="" alt=""class="pants">
-            <img src="" alt=""class="pants">
+            <img src="{{pants1}}" alt=""class="pants">
+            <img src="{{pants2}}" alt=""class="pants">
 
         </div>
         <div id="tool">
 
-            <img src="" alt=""class="tools">
-            <img src="" alt=""class="tools">
-            <img src="" alt=""class="tools">
+            <img src="{{unb}}" alt=""class="tools">
+            <img src="{{scarf}}" alt=""class="tools">
+            <img src="{{hat}}" alt=""class="tools">
         </div>
     </div>
+    %end
+    %for rwaitao,rzhong,rli,rkuzi,rxiali in item:
     <div id="bottom">
+        <div id="bottomtext">
+            <p class = "msg">  오늘 추천 상의 : {{rwaitao}}&nbsp&nbsp{{rzhong}}&nbsp&nbsp{{rli}} </p>
+            <p class= "msg">  오늘 추천 바지 : &nbsp&nbsp&nbsp&nbsp{{rkuzi}}&nbsp&nbsp{{rxiali}} </p>
+        
+            
+    
+            
+        </div>
     </div>
     %end
 
@@ -411,7 +514,7 @@ template_demo= """
 </html>"""
 
 print("html ")
-html = template(template_demo, items=articles)
+html = template(template_demo, items=articles, item=articles2)
 with open(GEN_HTML,'w') as f:
     f.write(html)
 
