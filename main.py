@@ -7,8 +7,8 @@ import webbrowser
 from bottle import template
 
 
-get_weather()
-get_rain()
+# get_weather()
+# get_rain()
 
 now_month = datetime.datetime.now().month
 
@@ -206,20 +206,22 @@ rli = ''.join(rli)
 rxiali = ''.join(rxiali)
 rkuzi = ''.join(rkuzi)
 
-we = "img/weather/"
-clo = "img/closthes/"
+we = "./img/weather/"
+clo = "./img/closthes/"
 png = ".png"
 
 
 # 우산 , 목도리  모자
 if weather == "가끔 눈, 한때 눈" or weather == "가끔 비, 한때 비" or weather == "비 또는 눈" or weather == "가끔 비 또는 눈" or weather == "눈 또는 비" or weather == "한때 눈 또는 비" or weather == "눈날림" or weather == "가끔 비 또는 눈,한때 비 또는 눈" or weather =="가끔 눈 또는 비,한때 눈 또는 비" or weather == "비" or weather == "눈" or weather == "빗방울":
     unb = clo+"우산"+png
+else:
+    unb = clo+"not"+png 
 if rain_ > 0:
     rainmsg = "미래 10시간 강수확률: " + str(rain_) + "% 입니다."
     unb = clo+"우산"+png
 else:
     rainmsg="10시간내 비 소식이 없습니다."
-    nub = clo+"not"+png
+    uub = clo+"not"+png
     
 if float(tmr) < 0:
     scarf = clo+"목도리"+png
@@ -243,8 +245,6 @@ elif rwaitao == "패딩":
 elif rwaitao == 'not':
     closthes1 = clo+rwaitao+png
     rwaitao = ""
-
-
 
 # 중간층 그림
 if rzhong == "얇은 스웨터" or rzhong == "두꺼운 스웨터" :
@@ -303,7 +303,8 @@ tt.replace('\n', '').replace('\r', '')
 
 
 
-articles = [(tt ,weather,tmr,rainmsg,closthes1,closthes2,closthes3,pants1,pants2,unb,scarf,hat)]
+
+articles = [(tt ,weather,tmr,rainmsg,closthes3,closthes2,closthes1,pants1,pants2,unb,scarf,hat)]
 articles2 = [(rwaitao,rzhong,rli,rkuzi,rxiali)]
 template_demo= """
 <!DOCTYPE html>
@@ -451,7 +452,7 @@ template_demo= """
     </style>
 </head>
 <body>
-    % for wear,weather,tmr,rain,closthes1,closthes2,closthes3,pants1,pants2,unb,scarf,hat in items:
+    % for wear,weather,tmr,rain,closthes3,closthes2,closthes1,pants1,pants2,unb,scarf,hat in items:
     <div id="top">
         <div id="weimg">
             <img src="{{wear}}" alt="" id="wepng">
@@ -467,9 +468,9 @@ template_demo= """
     <div id="main">
         <div id="clothes">
 
-            <img src="{{closthes1}}" alt=""class="upclothes">
+            <img src="{{closthes3}}" alt=""class="upclothes">
             <img src="{{closthes2}}" alt=""class="upclothes">
-            <img src="{{closthes3}}" alt="" class="upclothes">
+            <img src="{{closthes1}}" alt="" class="upclothes">
 
 
         </div>
