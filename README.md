@@ -24,7 +24,7 @@ source code：<br>
   *Algorithm for recommending clothes： 요지학，원복용<br>
   *webpage (ui)：왕욱박，왕성룡<br>
   
-other Information Collection：원복용<br>
+other cnformation collection：원복용<br>
 ppt：원복용<br>
 report：요지학（main），왕성룡，왕욱박，원복용<br>
 speech：왕성룡（twice），원복용（first），요지학（last）<br>
