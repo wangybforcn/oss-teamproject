@@ -3,7 +3,7 @@ oss수업 teamproject
 
 팀:왕욱박,왕성룡,요지학,원복용
 
-A program that recommends what to wear today based on weather conditions
+A program that recommends what to wear today based on weather conditions(korea)
 
 Project Introduction:<br>
   Crawling the current weather information through the python crawler and constructing an algorithm based on the weather information to recommend how to dress.
