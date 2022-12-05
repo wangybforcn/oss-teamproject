@@ -25,6 +25,6 @@ source code：<br>
   *webpage (ui)：왕욱박，왕성룡<br>
   
 other cnformation collection：원복용<br>
-ppt：원복용<br>
+ppt：요지학 <br>
 report：요지학（main），왕성룡，왕욱박，원복용<br>
 speech：왕성룡，원복용
